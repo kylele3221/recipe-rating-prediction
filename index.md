@@ -203,7 +203,23 @@ Other metrics like MAE (mean absolute error) could also be used, but MSE is chos
 
 ## Baseline Model
 
-*Section coming soon. Here you will describe your baseline model (e.g., predicting the mean), show its performance, and briefly interpret what this means in context.*
+For our baseline model, we used a simple approach: predicting the mean user rating for all recipes, regardless of their nutritional information or any other features. This approach provides a reference point for evaluating the effectiveness of more complex models.
+
+**How the Baseline Model Works:**
+
+- The baseline model always predicts the average of the `average_rating` column from the training set for every recipe in the test set.
+
+**Performance of the Baseline Model:**
+
+- **Mean Squared Error (MSE) on Test Set:** [insert your calculated baseline MSE here]
+
+![Baseline Model: Predicted vs. Actual Ratings](baseline_scatter.png)
+
+**Interpretation:**
+
+The baseline model essentially ignores all features and assumes every recipe is rated like the average recipe in the dataset. Its performance (MSE) serves as a benchmark: if a more advanced model does not beat the baseline’s MSE, it is likely not capturing any meaningful relationship in the data.  
+If our regression model achieves a lower MSE than the baseline, it suggests that nutritional features provide at least some predictive power for recipe ratings.
+
 
 ---
 
