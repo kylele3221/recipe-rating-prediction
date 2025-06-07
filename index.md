@@ -178,7 +178,7 @@ The goal of our project is to predict how well a recipe will be rated based on i
 Regression
 
 **Response Variable:**  
-`average_rating` — the average user rating of a recipe.  
+`average_rating` : the average user rating of a recipe.  
 We chose this as our response variable because it directly measures recipe popularity and is central to our project’s question. Can nutritional facts predict how well a recipe is rated?
 
 **Evaluation Metric:**  
