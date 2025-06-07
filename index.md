@@ -262,25 +262,16 @@ To assess fairness in our model’s predictions, we compared performance across 
 **Evaluation Metric:**  
 Mean Squared Error (MSE) for each group, computed as the average squared difference between predicted and actual average ratings.
 
-**Null Hypothesis ($H_0$):**  
-The model has equal MSE for both low calorie and high calorie recipes:  
-$$
-H_0: \text{MSE}_{\text{low calorie}} = \text{MSE}_{\text{high calorie}}
-$$
+**Null Hypothesis :**  
+The model has equal MSE for both low calorie and high calorie recipes
 
-**Alternative Hypothesis ($H_A$):**  
-The MSE is different for low calorie and high calorie recipes:  
-$$
-H_A: \text{MSE}_{\text{low calorie}} \neq \text{MSE}_{\text{high calorie}}
-$$
+**Alternative Hypothesis :**  
+The MSE is different for low calorie and high calorie recipes
 
 **Test Statistic:**  
-Difference in MSE between Group X and Group Y:
-$$
-\text{Test Statistic} = \text{MSE}_{\text{low calorie}} - \text{MSE}_{\text{high calorie}}
-$$
+Difference in MSE between Group X and Group Y
 
-**Significance Level ($\alpha$):**  
+**Significance Level:**  
 0.05
 
 **Resulting p-value:**  
