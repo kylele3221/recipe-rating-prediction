@@ -146,19 +146,11 @@ The observed difference in average `minutes` between recipes with and without mi
 
 We wanted to investigate whether the average user rating is different for recipes with lower calories compared to those with higher calories.
 
-**Null Hypothesis ($H_0$):**  
+**Null Hypothesis:**  
 The average rating for low-calorie recipes is equal to the average rating for high-calorie recipes.
 
-$$
-H_0: \mu_{\text{low cal}} = \mu_{\text{high cal}}
-$$
-
-**Alternative Hypothesis ($H_A$):**  
+**Alternative Hypothesis:**  
 The average rating for low-calorie recipes is different from that of high-calorie recipes.
-
-$$
-H_A: \mu_{\text{low cal}} \neq \mu_{\text{high cal}}
-$$
 
 **Test Statistic:**  
 Difference in mean `average_rating` between the two groups (e.g., low vs. high calories).
