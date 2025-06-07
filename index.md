@@ -160,23 +160,11 @@ To focus strictly on the relationship between nutrition and ratings:
 
 ### Cleaned DataFrame Head
 
-
-
-Below is the head of the cleaned DataFrame, which shows the structure of the data used in the rest of the analysis:
+Below is the head of the cleaned DataFrame, showing the structure of the data used in the analysis:
 
 
 
-| id   | calories | total fat | sugar | sodium | protein | saturated fat | carbohydrates | average_rating |
-
-|------|----------|-----------|-------|--------|---------|---------------|---------------|----------------|
-
-| 1234 | 350.0    | 14.0      | 8.0   | 430.0  | 16.0    | 5.0           | 48.0          | 4.25           |
-
-| 2345 | 240.0    | 9.0       | 4.5   | 320.0  | 12.0    | 2.5           | 32.0          | 3.89           |
-
-| 3456 | 410.0    | 18.0      | 11.0  | 520.0  | 19.0    | 7.0           | 54.0          | 4.67           |
-
-| ...  | ...      | ...       | ...   | ...    | ...     | ...           | ...           | ...            |
+![Cleaned DataFrame Head](df_head.png)
 
 
 
