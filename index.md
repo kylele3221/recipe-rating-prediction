@@ -254,4 +254,38 @@ By engineering features that reflect real-world nutrition effects and carefully 
 
 ## Fairness Analysis
 
-*Section coming soon. Here you will discuss potential fairness concerns (e.g., does your model underpr*
+To assess fairness in our model’s predictions, we compared performance across two groups of recipes: **low calorie** (Group X) and **high calorie** (Group Y).
+
+- **Group X:** Recipes in the lowest 25% of calorie values (bottom quartile).
+- **Group Y:** Recipes in the highest 25% of calorie values (top quartile).
+
+**Evaluation Metric:**  
+Mean Squared Error (MSE) for each group, computed as the average squared difference between predicted and actual average ratings.
+
+**Null Hypothesis ($H_0$):**  
+The model has equal MSE for both low calorie and high calorie recipes:  
+$$
+H_0: \text{MSE}_{\text{low calorie}} = \text{MSE}_{\text{high calorie}}
+$$
+
+**Alternative Hypothesis ($H_A$):**  
+The MSE is different for low calorie and high calorie recipes:  
+$$
+H_A: \text{MSE}_{\text{low calorie}} \neq \text{MSE}_{\text{high calorie}}
+$$
+
+**Test Statistic:**  
+Difference in MSE between Group X and Group Y:
+$$
+\text{Test Statistic} = \text{MSE}_{\text{low calorie}} - \text{MSE}_{\text{high calorie}}
+$$
+
+**Significance Level ($\alpha$):**  
+0.05
+
+**Resulting p-value:**  
+[Insert your calculated p-value here from your permutation test or statistical comparison.]
+
+**Conclusion:**  
+[State your result: If the p-value is greater than 0.05, there is no evidence of unfairness in prediction error by calorie group. If p < 0.05, the model may systematically favor one group over the other.]
+
