@@ -162,3 +162,39 @@ The resulting boxplot below shows the distribution of `minutes` required for rec
 
 **Interpretation:**
 The observed difference in average `minutes` between recipes with and without missing reviews was 33.56, with a permutation test p-value of 0.6890. This suggests that there is no statistically significant relationship between the missingness of reviews and the preparation time of recipes. In other words, missing reviews do not appear to be associated with substantially different cooking times in this dataset.
+
+\---
+
+\## Hypothesis Testing
+
+We wanted to investigate whether the average preparation time (\`minutes\`) is different between recipes with missing reviews and those with non-missing reviews.
+
+\*\*Null Hypothesis (\$H\_0\$):\*\* &#x20;
+
+The average preparation time (\`minutes\`) is the same for recipes with missing reviews and those with non-missing reviews.
+
+\*\*Alternative Hypothesis (\$H\_A\$):\*\* &#x20;
+
+The average preparation time (\`minutes\`) is different for recipes with missing reviews compared to those with non-missing reviews.
+
+\*\*Test Statistic:\*\* &#x20;
+
+We used the difference in mean preparation time (\`minutes\`) between the two groups (missing review vs. not missing review) as our test statistic.
+
+\*\*Significance Level (\$\alpha\$):\*\* &#x20;
+
+We set the significance level at 0.05.
+
+\*\*Results:\*\* &#x20;
+
+\- Observed difference in means: 33.56 minutes &#x20;
+
+\- p-value: 0.6890
+
+\*\*Conclusion:\*\* &#x20;
+
+Since the p-value (0.6890) is much greater than our significance level (0.05), we fail to reject the null hypothesis. There is no statistically significant evidence that the average preparation time differs between recipes with missing reviews and those with non-missing reviews in this dataset.
+
+\*\*Justification:\*\* &#x20;
+
+The permutation test is a good choice here because it does not assume normality and directly compares the empirical distributions of the two groups. Using the difference in means as a test statistic aligns with our goal of comparing average preparation times, and a significance level of 0.05 is standard in data analysis.
