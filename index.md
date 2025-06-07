@@ -284,8 +284,9 @@ $$
 0.05
 
 **Resulting p-value:**  
-[Insert your calculated p-value here from your permutation test or statistical comparison.]
+0.6190
 
 **Conclusion:**  
-[State your result: If the p-value is greater than 0.05, there is no evidence of unfairness in prediction error by calorie group. If p < 0.05, the model may systematically favor one group over the other.]
+Since the p-value is much greater than 0.05, there is no statistically significant evidence that the model’s prediction error differs between low calorie and high calorie recipes. This suggests that the model’s accuracy is similar for both groups, and there is no indication of unfairness based on calorie level.
+
 
