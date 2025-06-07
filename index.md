@@ -13,19 +13,20 @@ This analysis was originally created as a school project, but it’s designed to
 Can a recipe’s nutritional facts—such as calories, fat, protein, and carbohydrates—predict how well it is rated by users on Food.com?
 
 **Why this matters:**  
-Understanding how nutrition relates to user ratings can be useful for anyone from food companies to home cooks. It can answer questions like: _Do healthier recipes tend to be rated higher or lower? Are certain nutritional facts associated with more popular recipes?_ With the help of data science and machine learning, we can look for trends that might otherwise go unnoticed.
+Understanding how nutrition relates to user ratings can be useful for anyone from food companies to home cooks. It can answer questions like: *Do healthier recipes tend to be rated higher or lower? Are certain nutritional facts associated with more popular recipes?* With the help of data science and machine learning, we can look for trends that might otherwise go unnoticed.
 
 **Dataset Details:**
+
 - **Number of rows (recipes):** The processed dataset has about **23,000** recipes, each paired with ratings from actual users.
 - **Relevant columns:**
-    - `calories`: Amount of calories per recipe.
-    - `total fat`: Total fat content.
-    - `sugar`: Sugar content.
-    - `sodium`: Sodium content.
-    - `protein`: Protein content.
-    - `saturated fat`: Saturated fat content.
-    - `carbohydrates`: Carbohydrate content.
-    - `average_rating`: The average user rating for the recipe (on a scale from just above 0 to 5, allowing for decimals).
+  - `calories`: Amount of calories per recipe.
+  - `total fat`: Total fat content.
+  - `sugar`: Sugar content.
+  - `sodium`: Sodium content.
+  - `protein`: Protein content.
+  - `saturated fat`: Saturated fat content.
+  - `carbohydrates`: Carbohydrate content.
+  - `average_rating`: The average user rating for the recipe (on a scale from just above 0 to 5, allowing for decimals).
 
 These columns represent the key nutritional facts and user feedback (rating) used to explore and answer the project’s central question.
 
@@ -39,16 +40,18 @@ Before conducting any analysis, we performed several data cleaning steps to ensu
 
 ### 1. Merging and Aligning the Data
 
-The raw dataset consisted of two separate files:  
-- **RAW_recipes.csv:** Contained metadata and nutrition facts for each recipe.  
+The raw dataset consisted of two separate files:
+
+- **RAW_recipes.csv:** Contained metadata and nutrition facts for each recipe.
 - **interactions.csv:** Contained user-submitted ratings for recipes.
 
 These files were joined by matching recipe IDs so that each recipe could be paired with its corresponding ratings. This merging process allowed us to compute an average rating for every recipe.
 
 ### 2. Parsing and Expanding Nutrition Information
 
-The original nutrition facts were stored as a single stringified list in each row (e.g., `"[150.0, 10.0, 5.0, ...]"`).  
+The original nutrition facts were stored as a single stringified list in each row (e.g., `[150.0, 10.0, 5.0, ...]`).  
 To make this data usable:
+
 - We converted the string list into an actual Python list of floats.
 - We then split these lists into individual nutrition columns: `calories`, `total fat`, `sugar`, `sodium`, `protein`, `saturated fat`, and `carbohydrates`.
 
@@ -57,6 +60,7 @@ To make this data usable:
 ### 3. Filtering and Averaging Ratings
 
 Each recipe could have multiple user ratings (as individual rows in the interactions file).
+
 - We grouped ratings by recipe and calculated the **average rating** for each recipe.
 - Ratings of exactly 0 were replaced with `NaN`, since a rating of 0 does not make sense on Food.com’s (0, 5] scale and likely represents missing or erroneous data.
 
@@ -65,6 +69,7 @@ Each recipe could have multiple user ratings (as individual rows in the interact
 ### 4. Dropping Irrelevant Columns
 
 To focus strictly on the relationship between nutrition and ratings:
+
 - We dropped columns unrelated to nutrition or rating, such as recipe name, contributor ID, steps, date submitted, and ingredient list.
 
 **Effect:** This reduced noise in the dataset and ensured only relevant features were included in analyses.
@@ -87,7 +92,7 @@ Below is the head of the cleaned DataFrame, showing the structure of the data us
 
 ---
 
-## Univariate Visualization
+### Univariate Visualization
 
 ![Distribution of Calories](univariate.png)
 
@@ -96,7 +101,7 @@ Most recipes contain fewer than 500 calories, with a sharp decrease in the numbe
 
 ---
 
-## Bivariate Visualization
+### Bivariate Visualization
 
 ![Scatter plot of Calories vs Rating](bivariate.png)
 
@@ -105,7 +110,7 @@ There is no obvious linear trend, but we see that most recipes—regardless of c
 
 ---
 
-## Grouped Table
+### Grouped Table
 
 ![Bar plot of Average Recipe Rating by Calories (500 Calorie Bins)](aggregates.png)
 
@@ -124,7 +129,7 @@ To determine whether the missingness is truly NMAR, we would need more informati
 
 ---
 
-## Results of Missingness Permutation Tests
+### Results of Missingness Permutation Tests
 
 To investigate the relationship between missingness in the `review` column and other variables, we performed a permutation test comparing the average `minutes` between recipes with missing reviews and those with non-missing reviews.
 
@@ -144,11 +149,19 @@ We wanted to investigate whether the average user rating is different for recipe
 **Null Hypothesis ($H_0$):**  
 The average rating for low-calorie recipes is equal to the average rating for high-calorie recipes.
 
+$$
+H_0: \mu_{\text{low cal}} = \mu_{\text{high cal}}
+$$
+
 **Alternative Hypothesis ($H_A$):**  
 The average rating for low-calorie recipes is different from that of high-calorie recipes.
 
+$$
+H_A: \mu_{\text{low cal}} \neq \mu_{\text{high cal}}
+$$
+
 **Test Statistic:**  
-Difference in mean `average_rating` between the two groups (e.g., low vs high calories).
+Difference in mean `average_rating` between the two groups (e.g., low vs. high calories).
 
 **Significance Level ($\alpha$):**  
 0.05
@@ -179,8 +192,27 @@ We chose this as our response variable because it directly measures recipe popul
 **Evaluation Metric:**  
 We use **Mean Squared Error (MSE)** to evaluate our regression models.  
 MSE is appropriate here because:
+
 - It penalizes larger errors more heavily, encouraging more accurate predictions.
 - It is a standard metric for regression and allows for direct comparison of models.
 - Since our ratings are on a fixed, continuous scale, MSE captures the average squared difference between predicted and actual ratings.
 
 Other metrics like MAE (mean absolute error) could also be used, but MSE is chosen because it is more sensitive to large errors, which we want to avoid in rating prediction.
+
+---
+
+## Baseline Model
+
+*Section coming soon. Here you will describe your baseline model (e.g., predicting the mean), show its performance, and briefly interpret what this means in context.*
+
+---
+
+## Final Model
+
+*Section coming soon. Here you will describe your final regression model, its features, performance (MSE), and interpret what you learned. Include one or more key visualizations if possible.*
+
+---
+
+## Fairness Analysis
+
+*Section coming soon. Here you will discuss potential fairness concerns (e.g., does your model underpr*
