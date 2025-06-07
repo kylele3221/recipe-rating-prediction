@@ -167,34 +167,64 @@ The observed difference in average `minutes` between recipes with and without mi
 
 \## Hypothesis Testing
 
-We wanted to investigate whether the average preparation time (\`minutes\`) is different between recipes with missing reviews and those with non-missing reviews.
+We wanted to investigate whether the average user rating is different for recipes with lower calories compared to those with higher calories.
 
 \*\*Null Hypothesis (\$H\_0\$):\*\* &#x20;
 
-The average preparation time (\`minutes\`) is the same for recipes with missing reviews and those with non-missing reviews.
+The average rating for low-calorie recipes is equal to the average rating for high-calorie recipes.
 
 \*\*Alternative Hypothesis (\$H\_A\$):\*\* &#x20;
 
-The average preparation time (\`minutes\`) is different for recipes with missing reviews compared to those with non-missing reviews.
+The average rating for low-calorie recipes is different from that of high-calorie recipes.
 
 \*\*Test Statistic:\*\* &#x20;
 
-We used the difference in mean preparation time (\`minutes\`) between the two groups (missing review vs. not missing review) as our test statistic.
+Difference in mean \`average\_rating\` between the two groups (e.g., low vs high calories).
 
 \*\*Significance Level (\$\alpha\$):\*\* &#x20;
 
-We set the significance level at 0.05.
+0.05
 
 \*\*Results:\*\* &#x20;
 
-\- Observed difference in means: 33.56 minutes &#x20;
+\- Observed difference in means: \*\[your number here]\*
 
-\- p-value: 0.6890
+\- p-value: \*\[your number here]\*
 
 \*\*Conclusion:\*\* &#x20;
 
-Since the p-value (0.6890) is much greater than our significance level (0.05), we fail to reject the null hypothesis. There is no statistically significant evidence that the average preparation time differs between recipes with missing reviews and those with non-missing reviews in this dataset.
+If the p-value is greater than 0.05, we fail to reject the null hypothesis, meaning there is no statistically significant difference in ratings between low- and high-calorie recipes. If the p-value is less than 0.05, we conclude there is a significant difference.
 
 \*\*Justification:\*\* &#x20;
 
-The permutation test is a good choice here because it does not assume normality and directly compares the empirical distributions of the two groups. Using the difference in means as a test statistic aligns with our goal of comparing average preparation times, and a significance level of 0.05 is standard in data analysis.
+The permutation test is appropriate for comparing means between two groups without assuming a particular distribution for ratings, which can be skewed or non-normal.
+
+\---
+
+\## Framing a Prediction Problem
+
+The goal of our project is to predict how well a recipe will be rated based on its nutritional information. Since the ratings in our dataset are on a continuous scale between just above 0 and 5 (including decimals), this is a \*\*regression problem\*\*.
+
+\*\*Prediction Type:\*\* &#x20;
+
+Regression (predicting a continuous variable)
+
+\*\*Response Variable:\*\* &#x20;
+
+\`average\_rating\` — the average user rating of a recipe. &#x20;
+
+We chose this as our response variable because it directly measures recipe popularity and is central to our project’s question: can nutritional facts predict how well a recipe is rated?
+
+\*\*Evaluation Metric:\*\* &#x20;
+
+We use \*\*Mean Squared Error (MSE)\*\* to evaluate our regression models. &#x20;
+
+MSE is appropriate here because:
+
+\- It penalizes larger errors more heavily, encouraging more accurate predictions.
+
+\- It is a standard metric for regression and allows for direct comparison of models.
+
+\- Since our ratings are on a fixed, continuous scale, MSE captures the average squared difference between predicted and actual ratings.
+
+Other metrics like MAE (mean absolute error) could also be used, but MSE is chosen because it is more sensitive to large errors, which we want to avoid in rating prediction.
