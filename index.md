@@ -7,10 +7,10 @@
 This project explores recipe and user rating data scraped from [food.com](https://www.food.com/), using data science and machine learning techniques to uncover insights. The main goal is to see how well a recipe’s nutritional content can predict its average user rating.
 
 **Who is this for?**  
-This analysis was originally created as a school project, but it’s designed to be approachable for anyone interested in food, data science, or both—whether you’re a student, employer, or a food enthusiast!
+This analysis was originally created as a school project, but it’s designed to be approachable for anyone interested in food, data science, or both whether you’re a student, employer, or a food enthusiast!
 
 **Central Question:**  
-Can a recipe’s nutritional facts—such as calories, fat, protein, and carbohydrates—predict how well it is rated by users on Food.com?
+Can a recipe’s nutritional facts such as calories, fat, protein, and carbohydrates predict how well it is rated by users on Food.com?
 
 **Why this matters:**  
 Understanding how nutrition relates to user ratings can be useful for anyone from food companies to home cooks. It can answer questions like: *Do healthier recipes tend to be rated higher or lower? Are certain nutritional facts associated with more popular recipes?* With the help of data science and machine learning, we can look for trends that might otherwise go unnoticed.
@@ -26,11 +26,11 @@ Understanding how nutrition relates to user ratings can be useful for anyone fro
   - `protein`: Protein content.
   - `saturated fat`: Saturated fat content.
   - `carbohydrates`: Carbohydrate content.
-  - `average_rating`: The average user rating for the recipe (on a scale from just above 0 to 5, allowing for decimals).
+  - `average_rating`: The average user rating for the recipe on a scale from 0 to 5, allowing for decimals.
 
-These columns represent the key nutritional facts and user feedback (rating) used to explore and answer the project’s central question.
+These columns represent the key nutritional facts and user feedback used to explore and answer the project’s central question.
 
-In this project, we use approachable, high-level data science and machine learning methods to both predict ratings and understand the relationship between nutrition and popularity.
+In this project, we use approachable, high level data science and machine learning methods to both predict ratings and understand the relationship between nutrition and popularity.
 
 ---
 
@@ -43,7 +43,7 @@ Before conducting any analysis, we performed several data cleaning steps to ensu
 The raw dataset consisted of two separate files:
 
 - **RAW_recipes.csv:** Contained metadata and nutrition facts for each recipe.
-- **interactions.csv:** Contained user-submitted ratings for recipes.
+- **interactions.csv:** Contained user submitted ratings for recipes.
 
 These files were joined by matching recipe IDs so that each recipe could be paired with its corresponding ratings. This merging process allowed us to compute an average rating for every recipe.
 
@@ -59,7 +59,7 @@ To make this data usable:
 
 ### 3. Filtering and Averaging Ratings
 
-Each recipe could have multiple user ratings (as individual rows in the interactions file).
+Each recipe could have multiple user ratings.
 
 - We grouped ratings by recipe and calculated the **average rating** for each recipe.
 - Ratings of exactly 0 were replaced with `NaN`, since a rating of 0 does not make sense on Food.com’s (0, 5] scale and likely represents missing or erroneous data.
@@ -77,7 +77,7 @@ To focus strictly on the relationship between nutrition and ratings:
 ### 5. Additional Notes
 
 - **Outlier Filtering:** Any additional filtering, such as removing recipes with more than 2500 calories, was performed during the exploratory data analysis step, not as part of initial cleaning.
-- **Missing Data:** No extensive missing value imputation was done, aside from converting 0 ratings to `NaN`. Recipes or nutritional facts missing for other reasons were left as-is.
+- **Missing Data:** No extensive missing value imputation was done, aside from converting 0 ratings to `NaN`. Recipes or nutritional facts missing for other reasons were left as is.
 - **No Standardization:** All analyses were performed using raw, unstandardized nutritional values.
 - **Duplicates:** No explicit steps were taken to remove duplicate recipes or users.
 - **Aggregation Choice:** The **mean** was used to aggregate ratings per recipe, as required by the project instructions.
@@ -123,15 +123,15 @@ The ratings are consistently high across all calorie bins, suggesting that recip
 
 In our dataset, the primary missing values occur in the `average_rating` column. Specifically, ratings that were exactly 0 were treated as missing (`NaN`) because a rating of 0 does not make sense on Food.com’s (0, 5] scale and likely represents missing or erroneous data.
 
-Based on our understanding of the data collection process, it is possible that some missing ratings are **not missing at random (NMAR)**. For example, a user may be more likely to skip rating a recipe if they did not like it or did not finish making it. This means the likelihood of a rating being missing could depend on the actual (unobserved) rating value itself. As a result, analyses using only the observed ratings might overestimate the average rating.
+Based on our understanding of the data collection process, it is possible that some missing ratings are **not missing at random (NMAR)**. For example, a user may be more likely to skip rating a recipe if they did not like it or did not finish making it. This means the likelihood of a rating being missing could depend on the actual rating value itself. As a result, analyses using only the observed ratings might overestimate the average rating.
 
-To determine whether the missingness is truly NMAR, we would need more information—such as user activity logs, reasons for missing ratings, or explicit feedback from users on why they did not rate a recipe. If such data were available, we could potentially reclassify the missingness as **missing at random (MAR)** if we could explain it using other observed variables (like user engagement or recipe difficulty).
+To determine whether the missingness is truly NMAR, we would need more information—such as user activity logs, reasons for missing ratings, or explicit feedback from users on why they did not rate a recipe. If such data were available, we could potentially reclassify the missingness as **missing at random (MAR)** if we could explain it using other observed variables.
 
 ---
 
 ### Results of Missingness Permutation Tests
 
-To investigate the relationship between missingness in the `review` column and other variables, we performed a permutation test comparing the average `minutes` between recipes with missing reviews and those with non-missing reviews.
+To investigate the relationship between missingness in the `review` column and other variables, we performed a permutation test comparing the average `minutes` between recipes with missing reviews and those with nonmissing reviews.
 
 The resulting boxplot below shows the distribution of `minutes` required for recipes, separated by whether the review is missing (`true`) or not missing (`false`). While there are some extreme outliers, the vast majority of recipes for both groups cluster at much lower values.
 
@@ -155,31 +155,31 @@ The average rating for low-calorie recipes is different from that of high-calori
 **Test Statistic:**  
 Difference in mean `average_rating` between the two groups (e.g., low vs. high calories).
 
-**Significance Level ($\alpha$):**  
+**Significance Level:**  
 0.05
 
 **Results:**  
-- Observed difference in means: [your number here]
-- p-value: [your number here]
+- Observed difference in means: -0.024569589951149773
+- p-value: 0.0
 
 **Conclusion:**  
 If the p-value is greater than 0.05, we fail to reject the null hypothesis, meaning there is no statistically significant difference in ratings between low- and high-calorie recipes. If the p-value is less than 0.05, we conclude there is a significant difference.
 
 **Justification:**  
-The permutation test is appropriate for comparing means between two groups without assuming a particular distribution for ratings, which can be skewed or non-normal.
+The permutation test is appropriate for comparing means between two groups without assuming a particular distribution for ratings, which can be skewed or not normal.
 
 ---
 
 ## Framing a Prediction Problem
 
-The goal of our project is to predict how well a recipe will be rated based on its nutritional information. Since the ratings in our dataset are on a continuous scale between just above 0 and 5 (including decimals), this is a **regression problem**.
+The goal of our project is to predict how well a recipe will be rated based on its nutritional information. Since the ratings in our dataset are on a continuous scale between just above 0 and 5, this is a **regression problem**.
 
 **Prediction Type:**  
-Regression (predicting a continuous variable)
+Regression
 
 **Response Variable:**  
 `average_rating` — the average user rating of a recipe.  
-We chose this as our response variable because it directly measures recipe popularity and is central to our project’s question: can nutritional facts predict how well a recipe is rated?
+We chose this as our response variable because it directly measures recipe popularity and is central to our project’s question. Can nutritional facts predict how well a recipe is rated?
 
 **Evaluation Metric:**  
 We use **Mean Squared Error (MSE)** to evaluate our regression models.  
@@ -203,13 +203,13 @@ For our baseline model, we used a simple approach: predicting the mean user rati
 
 **Performance of the Baseline Model:**
 
-- **Mean Squared Error (MSE) on Test Set:** [insert your calculated baseline MSE here]
+- **Mean Squared Error (MSE) on Test Set:** 0.6014
 
 ![Baseline Model: Predicted vs. Actual Ratings](baseline_scatter.png)
 
 **Interpretation:**
 
-The baseline model essentially ignores all features and assumes every recipe is rated like the average recipe in the dataset. Its performance (MSE) serves as a benchmark: if a more advanced model does not beat the baseline’s MSE, it is likely not capturing any meaningful relationship in the data.  
+The baseline model essentially ignores all features and assumes every recipe is rated like the average recipe in the dataset. Its performance serves as a benchmark. If a more advanced model does not beat the baseline’s MSE, it is likely not capturing any meaningful relationship in the data.  
 If our regression model achieves a lower MSE than the baseline, it suggests that nutritional features provide at least some predictive power for recipe ratings.
 
 
@@ -223,18 +223,18 @@ For our final model, we expanded our feature set and used **Ridge Regression** t
 
 We started with `calories` and `sugar`, then engineered two new features:
 
-- `calories_x_sugar`: The interaction between calories and sugar, which captures how these two nutrients might jointly affect user perceptions (for example, high-calorie, high-sugar recipes might be desserts, which are rated differently).
-- `log_calories`: The natural log of (calories + 1), which helps the model handle skewed calorie values and recognize diminishing returns—an extra 100 calories matters more for a 100-calorie recipe than a 1000-calorie one.
+- `calories_x_sugar`: The interaction between calories and sugar, which captures how these two nutrients might jointly affect user perceptions for example, high-calorie, high sugar recipes might be desserts, which are rated differently.
+- `log_calories`: The natural log of (calories + 1), which helps the model handle skewed calorie values and recognize diminishing returns an extra 100 calories matters more for a 100 calorie recipe than a 1000 calorie one.
 
 All features are quantitative. No ordinal or nominal variables were included, so no encoding was needed.
 
 **Data Preparation:**
 
-All features were standardized (mean 0, standard deviation 1) based on the training data, ensuring the Ridge penalty treated each variable equally.
+All features were standardized based on the training data, ensuring the Ridge penalty treated each variable equally.
 
 **Modeling Algorithm & Hyperparameter Tuning:**
 
-We chose **Ridge Regression**, a regularized form of linear regression that helps prevent overfitting by penalizing large coefficients. We performed a manual grid search over several alpha (penalty) values (`[0.01, 0.1, 1, 10, 100]`) and selected the alpha with the lowest test Mean Squared Error (MSE).
+We chose **Ridge Regression**, a regularized form of linear regression that helps prevent overfitting by penalizing large coefficients. We performed a manual grid search over several alpha values (`[0.01, 0.1, 1, 10, 100]`) and selected the alpha with the lowest test MSE.
 
 **Model Selection and Performance:**
 
@@ -243,11 +243,11 @@ We chose **Ridge Regression**, a regularized form of linear regression that help
 
 **Improvement over Baseline:**
 
-Our final model outperformed the baseline (mean-only) model by capturing both individual effects of calories and sugar, as well as their interaction and the diminishing returns of very high calorie counts. The improvement in MSE demonstrates that thoughtful feature engineering and regularization meaningfully increased predictive power.
+Our final model outperformed the baseline model by capturing both individual effects of calories and sugar, as well as their interaction and the diminishing returns of very high calorie counts. The improvement in MSE demonstrates that thoughtful feature engineering and regularization meaningfully increased predictive power.
 
 **Interpretation:**
 
-By engineering features that reflect real-world nutrition effects and carefully tuning the regularization, our model achieves a better fit and avoids overfitting, providing more credible and useful predictions for recipe ratings based on nutrition.
+By engineering features that reflect real world nutrition effects and carefully tuning the regularization, our model achieves a better fit and avoids overfitting, providing more credible and useful predictions for recipe ratings based on nutrition.
 
 
 ---
@@ -256,11 +256,11 @@ By engineering features that reflect real-world nutrition effects and carefully 
 
 To assess fairness in our model’s predictions, we compared performance across two groups of recipes: **low calorie** (Group X) and **high calorie** (Group Y).
 
-- **Group X:** Recipes in the lowest 25% of calorie values (bottom quartile).
-- **Group Y:** Recipes in the highest 25% of calorie values (top quartile).
+- **Group X:** Recipes in the lowest 25% of calorie values.
+- **Group Y:** Recipes in the highest 25% of calorie values.
 
 **Evaluation Metric:**  
-Mean Squared Error (MSE) for each group, computed as the average squared difference between predicted and actual average ratings.
+MSE for each group, computed as the average squared difference between predicted and actual average ratings.
 
 **Null Hypothesis :**  
 The model has equal MSE for both low calorie and high calorie recipes
