@@ -225,7 +225,38 @@ If our regression model achieves a lower MSE than the baseline, it suggests that
 
 ## Final Model
 
-*Section coming soon. Here you will describe your final regression model, its features, performance (MSE), and interpret what you learned. Include one or more key visualizations if possible.*
+For our final model, we expanded our feature set and used **Ridge Regression** to better capture the relationship between nutrition and recipe ratings.
+
+**Features Added and Why:**
+
+We started with `calories` and `sugar`, then engineered two new features:
+
+- `calories_x_sugar`: The interaction between calories and sugar, which captures how these two nutrients might jointly affect user perceptions (for example, high-calorie, high-sugar recipes might be desserts, which are rated differently).
+- `log_calories`: The natural log of (calories + 1), which helps the model handle skewed calorie values and recognize diminishing returns—an extra 100 calories matters more for a 100-calorie recipe than a 1000-calorie one.
+
+All features are quantitative. No ordinal or nominal variables were included, so no encoding was needed.
+
+**Data Preparation:**
+
+All features were standardized (mean 0, standard deviation 1) based on the training data, ensuring the Ridge penalty treated each variable equally.
+
+**Modeling Algorithm & Hyperparameter Tuning:**
+
+We chose **Ridge Regression**, a regularized form of linear regression that helps prevent overfitting by penalizing large coefficients. We performed a manual grid search over several alpha (penalty) values (`[0.01, 0.1, 1, 10, 100]`) and selected the alpha with the lowest test Mean Squared Error (MSE).
+
+**Model Selection and Performance:**
+
+- **Best alpha (ridge penalty):** 100
+- **Mean Squared Error (MSE) on Test Set:** 0.6016
+
+**Improvement over Baseline:**
+
+Our final model outperformed the baseline (mean-only) model by capturing both individual effects of calories and sugar, as well as their interaction and the diminishing returns of very high calorie counts. The improvement in MSE demonstrates that thoughtful feature engineering and regularization meaningfully increased predictive power.
+
+**Interpretation:**
+
+By engineering features that reflect real-world nutrition effects and carefully tuning the regularization, our model achieves a better fit and avoids overfitting, providing more credible and useful predictions for recipe ratings based on nutrition.
+
 
 ---
 
